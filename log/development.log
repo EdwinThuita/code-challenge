@@ -5583,3 +5583,14 @@ Processing by HerosController#index as HTML
 Completed 200 OK in 25ms (Views: 22.8ms | ActiveRecord: 1.3ms | Allocations: 10575)
 
 
+Started GET "/heros/401" for 127.0.0.1 at 2023-03-31 06:49:59 +0300
+Processing by HerosController#show as HTML
+  Parameters: {"id"=>"401"}
+  [1m[36mHero Load (0.2ms)[0m  [1m[34mSELECT "heros".* FROM "heros" WHERE "heros"."id" = ? LIMIT ?[0m  [["id", 401], ["LIMIT", 1]]
+  ↳ app/controllers/heros_controller.rb:46:in `set_hero'
+[active_model_serializers]   [1m[36mPower Load (0.2ms)[0m  [1m[34mSELECT "powers".* FROM "powers" INNER JOIN "hero_powers" ON "powers"."id" = "hero_powers"."power_id" WHERE "hero_powers"."hero_id" = ?[0m  [["hero_id", 401]]
+[active_model_serializers]   ↳ app/controllers/heros_controller.rb:13:in `show'
+[active_model_serializers] Rendered HeroSerializer with ActiveModelSerializers::Adapter::Attributes (3.49ms)
+Completed 200 OK in 6ms (Views: 3.9ms | ActiveRecord: 0.4ms | Allocations: 1835)
+
+
