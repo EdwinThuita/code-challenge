@@ -1,0 +1,1056 @@
+  [1m[35m (73.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (64.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateHeros (20230329051943)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "heros" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "super_name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230329051943"]]
+  [1m[36mTRANSACTION (65.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePowers (20230329052027)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "powers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230329052027"]]
+  [1m[36mTRANSACTION (64.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateHeroPowers (20230329052127)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "hero_powers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "strength" varchar, "hero_id" integer NOT NULL, "power_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a064e6fddd"
+FOREIGN KEY ("hero_id")
+  REFERENCES "heros" ("id")
+, CONSTRAINT "fk_rails_1e7d81986f"
+FOREIGN KEY ("power_id")
+  REFERENCES "powers" ("id")
+)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_hero_powers_on_hero_id" ON "hero_powers" ("hero_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_hero_powers_on_power_id" ON "hero_powers" ("power_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230329052127"]]
+  [1m[36mTRANSACTION (63.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-31 02:30:25.619412"], ["updated_at", "2023-03-31 02:30:25.619412"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mHeroPower Delete All (0.1ms)[0m  [1m[31mDELETE FROM "hero_powers"[0m
+  [1m[36mPower Delete All (0.1ms)[0m  [1m[31mDELETE FROM "powers"[0m
+  [1m[36mHero Delete All (0.1ms)[0m  [1m[31mDELETE FROM "heros"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.3ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Power Sense"], ["description", "Chuck Norris finished World of Warcraft."], ["created_at", "2023-03-31 02:30:44.998402"], ["updated_at", "2023-03-31 02:30:44.998402"]]
+  [1m[36mTRANSACTION (85.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.4ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Geokinesis"], ["description", "Chuck Norris breaks RSA 128-bit encrypted codes in milliseconds."], ["created_at", "2023-03-31 02:30:45.087302"], ["updated_at", "2023-03-31 02:30:45.087302"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.4ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Power Absorption"], ["description", "When Chuck Norris presses Ctrl+Alt+Delete, worldwide computer restart is initiated."], ["created_at", "2023-03-31 02:30:45.142700"], ["updated_at", "2023-03-31 02:30:45.142700"]]
+  [1m[36mTRANSACTION (57.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.3ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Astral Projection"], ["description", "Chuck Norris doesn't need a debugger, he just stares down the bug until the code confesses."], ["created_at", "2023-03-31 02:30:45.204652"], ["updated_at", "2023-03-31 02:30:45.204652"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Elemental Transmogrification"], ["description", "Chuck Norris doesn't need a java compiler, he goes straight to .war"], ["created_at", "2023-03-31 02:30:45.259863"], ["updated_at", "2023-03-31 02:30:45.259863"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vitakinesis"], ["description", "When Chuck Norris points to null, null quakes in fear."], ["created_at", "2023-03-31 02:30:45.314266"], ["updated_at", "2023-03-31 02:30:45.314266"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vision - Thermal"], ["description", "Chuck Norris solved the Travelling Salesman problem in O(1) time."], ["created_at", "2023-03-31 02:30:45.367925"], ["updated_at", "2023-03-31 02:30:45.367925"]]
+  [1m[36mTRANSACTION (54.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Radiation Control"], ["description", "Chuck Norris can access private methods."], ["created_at", "2023-03-31 02:30:45.425350"], ["updated_at", "2023-03-31 02:30:45.425350"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vision - Thermal"], ["description", "There is nothing regular about Chuck Norris' expressions."], ["created_at", "2023-03-31 02:30:45.480594"], ["updated_at", "2023-03-31 02:30:45.480594"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Clairvoyance"], ["description", "You don't disable the Chuck Norris plug-in, it disables you."], ["created_at", "2023-03-31 02:30:45.534514"], ["updated_at", "2023-03-31 02:30:45.534514"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Molecular Dissipation"], ["description", "Chuck Norris doesn't have disk latency because the hard drive knows to hurry the hell up."], ["created_at", "2023-03-31 02:30:45.588837"], ["updated_at", "2023-03-31 02:30:45.588837"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Longevity"], ["description", "Chuck Norris doesn't need garbage collection because he doesn't call .Dispose(), he calls .DropKick()."], ["created_at", "2023-03-31 02:30:45.643119"], ["updated_at", "2023-03-31 02:30:45.643119"]]
+  [1m[36mTRANSACTION (63.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Dexterity"], ["description", "Chuck Norris programs do not accept input."], ["created_at", "2023-03-31 02:30:45.709712"], ["updated_at", "2023-03-31 02:30:45.709712"]]
+  [1m[36mTRANSACTION (59.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Cross-Dimensional Awareness"], ["description", "Chuck Norris can access private methods."], ["created_at", "2023-03-31 02:30:45.771793"], ["updated_at", "2023-03-31 02:30:45.771793"]]
+  [1m[36mTRANSACTION (58.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Chronokinesis"], ["description", "When Chuck Norris points to null, null quakes in fear."], ["created_at", "2023-03-31 02:30:45.833278"], ["updated_at", "2023-03-31 02:30:45.833278"]]
+  [1m[36mTRANSACTION (60.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Time Travel"], ["description", "Chuck Norris can instantiate an abstract class."], ["created_at", "2023-03-31 02:30:45.896889"], ["updated_at", "2023-03-31 02:30:45.896889"]]
+  [1m[36mTRANSACTION (59.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Chronokinesis"], ["description", "Chuck Norris does not use revision control software. None of his code has ever needed revision."], ["created_at", "2023-03-31 02:30:45.959360"], ["updated_at", "2023-03-31 02:30:45.959360"]]
+  [1m[36mTRANSACTION (59.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Umbrakinesis"], ["description", "Quantum cryptography does not work on Chuck Norris. When something is being observed by Chuck it stays in the same state until he's finished."], ["created_at", "2023-03-31 02:30:46.021686"], ["updated_at", "2023-03-31 02:30:46.021686"]]
+  [1m[36mTRANSACTION (88.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Enhanced Memory"], ["description", "For Chuck Norris, NP-Hard = O(1)."], ["created_at", "2023-03-31 02:30:46.113248"], ["updated_at", "2023-03-31 02:30:46.113248"]]
+  [1m[36mTRANSACTION (65.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Spatial Awareness"], ["description", "Chuck Norris doesn't need garbage collection because he doesn't call .Dispose(), he calls .DropKick()."], ["created_at", "2023-03-31 02:30:46.181033"], ["updated_at", "2023-03-31 02:30:46.181033"]]
+  [1m[36mTRANSACTION (63.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Spatial Awareness"], ["description", "Chuck Norris doesn't get compiler errors, the language changes itself to accommodate Chuck Norris."], ["created_at", "2023-03-31 02:30:46.246889"], ["updated_at", "2023-03-31 02:30:46.246889"]]
+  [1m[36mTRANSACTION (60.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Clairvoyance"], ["description", "For Chuck Norris, NP-Hard = O(1)."], ["created_at", "2023-03-31 02:30:46.309743"], ["updated_at", "2023-03-31 02:30:46.309743"]]
+  [1m[36mTRANSACTION (60.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Energy Beams"], ["description", "Chuck Norris doesn't use web standards as the web will conform to him."], ["created_at", "2023-03-31 02:30:46.372648"], ["updated_at", "2023-03-31 02:30:46.372648"]]
+  [1m[36mTRANSACTION (59.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Longevity"], ["description", "Chuck Norris can access the DB from the UI."], ["created_at", "2023-03-31 02:30:46.434838"], ["updated_at", "2023-03-31 02:30:46.434838"]]
+  [1m[36mTRANSACTION (60.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Size Changing"], ["description", "Chuck Norris can compile syntax errors."], ["created_at", "2023-03-31 02:30:46.498191"], ["updated_at", "2023-03-31 02:30:46.498191"]]
+  [1m[36mTRANSACTION (58.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Biokinesis"], ["description", "Chuck Norris doesn't need a java compiler, he goes straight to .war"], ["created_at", "2023-03-31 02:30:46.559875"], ["updated_at", "2023-03-31 02:30:46.559875"]]
+  [1m[36mTRANSACTION (60.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vision - Infrared"], ["description", "Chuck Norris' addition operator doesn't commute; it teleports to where he needs it to be."], ["created_at", "2023-03-31 02:30:46.623460"], ["updated_at", "2023-03-31 02:30:46.623460"]]
+  [1m[36mTRANSACTION (57.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Toxin and Disease Resistance"], ["description", "There is no Esc key on Chuck Norris' keyboard, because no one escapes Chuck Norris."], ["created_at", "2023-03-31 02:30:46.683521"], ["updated_at", "2023-03-31 02:30:46.683521"]]
+  [1m[36mTRANSACTION (56.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Weapon-based Powers"], ["description", "Chuck Norris knows the last digit of PI."], ["created_at", "2023-03-31 02:30:46.742774"], ["updated_at", "2023-03-31 02:30:46.742774"]]
+  [1m[36mTRANSACTION (71.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPower Create (0.2ms)[0m  [1m[32mINSERT INTO "powers" ("name", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Empathy"], ["description", "Chuck Norris can read all encrypted data, because nothing can hide from Chuck Norris."], ["created_at", "2023-03-31 02:30:46.817254"], ["updated_at", "2023-03-31 02:30:46.817254"]]
+  [1m[36mTRANSACTION (55.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Angeles Torp"], ["super_name", "Dark Hulk"], ["created_at", "2023-03-31 02:30:46.882830"], ["updated_at", "2023-03-31 02:30:46.882830"]]
+  [1m[36mTRANSACTION (52.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.4ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 1], ["power_id", 10], ["created_at", "2023-03-31 02:30:46.954456"], ["updated_at", "2023-03-31 02:30:46.954456"]]
+  [1m[36mTRANSACTION (56.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 1], ["power_id", 1], ["created_at", "2023-03-31 02:30:47.015020"], ["updated_at", "2023-03-31 02:30:47.015020"]]
+  [1m[36mTRANSACTION (93.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 1], ["power_id", 19], ["created_at", "2023-03-31 02:30:47.111673"], ["updated_at", "2023-03-31 02:30:47.111673"]]
+  [1m[36mTRANSACTION (59.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vi Klocko"], ["super_name", "Cyborg Blob Eyes"], ["created_at", "2023-03-31 02:30:47.174283"], ["updated_at", "2023-03-31 02:30:47.174283"]]
+  [1m[36mTRANSACTION (61.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 2], ["power_id", 24], ["created_at", "2023-03-31 02:30:47.238313"], ["updated_at", "2023-03-31 02:30:47.238313"]]
+  [1m[36mTRANSACTION (59.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 2], ["power_id", 25], ["created_at", "2023-03-31 02:30:47.300156"], ["updated_at", "2023-03-31 02:30:47.300156"]]
+  [1m[36mTRANSACTION (62.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 2], ["power_id", 3], ["created_at", "2023-03-31 02:30:47.364945"], ["updated_at", "2023-03-31 02:30:47.364945"]]
+  [1m[36mTRANSACTION (63.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.3ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Micah Collins"], ["super_name", "Etrigan"], ["created_at", "2023-03-31 02:30:47.431447"], ["updated_at", "2023-03-31 02:30:47.431447"]]
+  [1m[36mTRANSACTION (55.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 3], ["power_id", 6], ["created_at", "2023-03-31 02:30:47.489559"], ["updated_at", "2023-03-31 02:30:47.489559"]]
+  [1m[36mTRANSACTION (59.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Wiley Brakus"], ["super_name", "Illustrious Riddler XI"], ["created_at", "2023-03-31 02:30:47.551993"], ["updated_at", "2023-03-31 02:30:47.551993"]]
+  [1m[36mTRANSACTION (58.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 4], ["power_id", 12], ["created_at", "2023-03-31 02:30:47.613535"], ["updated_at", "2023-03-31 02:30:47.613535"]]
+  [1m[36mTRANSACTION (60.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 4], ["power_id", 24], ["created_at", "2023-03-31 02:30:47.676388"], ["updated_at", "2023-03-31 02:30:47.676388"]]
+  [1m[36mTRANSACTION (59.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Linwood Anderson"], ["super_name", "Synch"], ["created_at", "2023-03-31 02:30:47.738462"], ["updated_at", "2023-03-31 02:30:47.738462"]]
+  [1m[36mTRANSACTION (59.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 5], ["power_id", 15], ["created_at", "2023-03-31 02:30:47.801193"], ["updated_at", "2023-03-31 02:30:47.801193"]]
+  [1m[36mTRANSACTION (59.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 5], ["power_id", 1], ["created_at", "2023-03-31 02:30:47.863155"], ["updated_at", "2023-03-31 02:30:47.863155"]]
+  [1m[36mTRANSACTION (57.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 5], ["power_id", 26], ["created_at", "2023-03-31 02:30:47.923616"], ["updated_at", "2023-03-31 02:30:47.923616"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pete Stoltenberg JD"], ["super_name", "Ultra Daredevil Eyes"], ["created_at", "2023-03-31 02:30:47.978611"], ["updated_at", "2023-03-31 02:30:47.978611"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 6], ["power_id", 21], ["created_at", "2023-03-31 02:30:48.032622"], ["updated_at", "2023-03-31 02:30:48.032622"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 6], ["power_id", 9], ["created_at", "2023-03-31 02:30:48.087290"], ["updated_at", "2023-03-31 02:30:48.087290"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 6], ["power_id", 22], ["created_at", "2023-03-31 02:30:48.141275"], ["updated_at", "2023-03-31 02:30:48.141275"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pres. Lauren Swaniawski"], ["super_name", "Martian Manhunter Fist"], ["created_at", "2023-03-31 02:30:48.196246"], ["updated_at", "2023-03-31 02:30:48.196246"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 7], ["power_id", 8], ["created_at", "2023-03-31 02:30:48.250053"], ["updated_at", "2023-03-31 02:30:48.250053"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 7], ["power_id", 6], ["created_at", "2023-03-31 02:30:48.304065"], ["updated_at", "2023-03-31 02:30:48.304065"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Alfredo Luettgen"], ["super_name", "Longshot Spirit"], ["created_at", "2023-03-31 02:30:48.358930"], ["updated_at", "2023-03-31 02:30:48.358930"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 8], ["power_id", 12], ["created_at", "2023-03-31 02:30:48.412730"], ["updated_at", "2023-03-31 02:30:48.412730"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Dewitt Grimes"], ["super_name", "Giant Cloak Machine"], ["created_at", "2023-03-31 02:30:48.467495"], ["updated_at", "2023-03-31 02:30:48.467495"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 9], ["power_id", 3], ["created_at", "2023-03-31 02:30:48.521299"], ["updated_at", "2023-03-31 02:30:48.521299"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 9], ["power_id", 11], ["created_at", "2023-03-31 02:30:48.576140"], ["updated_at", "2023-03-31 02:30:48.576140"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Elvin Swaniawski"], ["super_name", "Omega Red Machine"], ["created_at", "2023-03-31 02:30:48.630415"], ["updated_at", "2023-03-31 02:30:48.630415"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 10], ["power_id", 3], ["created_at", "2023-03-31 02:30:48.684271"], ["updated_at", "2023-03-31 02:30:48.684271"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 10], ["power_id", 27], ["created_at", "2023-03-31 02:30:48.738497"], ["updated_at", "2023-03-31 02:30:48.738497"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 10], ["power_id", 22], ["created_at", "2023-03-31 02:30:48.792038"], ["updated_at", "2023-03-31 02:30:48.792038"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Casey Nolan V"], ["super_name", "Illustrious Bolt"], ["created_at", "2023-03-31 02:30:48.846819"], ["updated_at", "2023-03-31 02:30:48.846819"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 11], ["power_id", 17], ["created_at", "2023-03-31 02:30:48.900561"], ["updated_at", "2023-03-31 02:30:48.900561"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 11], ["power_id", 2], ["created_at", "2023-03-31 02:30:48.954239"], ["updated_at", "2023-03-31 02:30:48.954239"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 11], ["power_id", 21], ["created_at", "2023-03-31 02:30:49.008506"], ["updated_at", "2023-03-31 02:30:49.008506"]]
+  [1m[36mTRANSACTION (76.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Grace Jacobson"], ["super_name", "Green Domino Ivy"], ["created_at", "2023-03-31 02:30:49.087725"], ["updated_at", "2023-03-31 02:30:49.087725"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 12], ["power_id", 26], ["created_at", "2023-03-31 02:30:49.141757"], ["updated_at", "2023-03-31 02:30:49.141757"]]
+  [1m[36mTRANSACTION (55.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bok Huels"], ["super_name", "Joker Girl"], ["created_at", "2023-03-31 02:30:49.199770"], ["updated_at", "2023-03-31 02:30:49.199770"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 13], ["power_id", 24], ["created_at", "2023-03-31 02:30:49.254277"], ["updated_at", "2023-03-31 02:30:49.254277"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 13], ["power_id", 5], ["created_at", "2023-03-31 02:30:49.308376"], ["updated_at", "2023-03-31 02:30:49.308376"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Emilio Fahey"], ["super_name", "General Doc Samson Girl"], ["created_at", "2023-03-31 02:30:49.362799"], ["updated_at", "2023-03-31 02:30:49.362799"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 14], ["power_id", 15], ["created_at", "2023-03-31 02:30:49.417258"], ["updated_at", "2023-03-31 02:30:49.417258"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Raeann Lubowitz LLD"], ["super_name", "Binary"], ["created_at", "2023-03-31 02:30:49.471624"], ["updated_at", "2023-03-31 02:30:49.471624"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 15], ["power_id", 15], ["created_at", "2023-03-31 02:30:49.526095"], ["updated_at", "2023-03-31 02:30:49.526095"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 15], ["power_id", 24], ["created_at", "2023-03-31 02:30:49.580090"], ["updated_at", "2023-03-31 02:30:49.580090"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 15], ["power_id", 13], ["created_at", "2023-03-31 02:30:49.635144"], ["updated_at", "2023-03-31 02:30:49.635144"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Eric Ernser"], ["super_name", "Granny Goodness Thirteen"], ["created_at", "2023-03-31 02:30:49.689890"], ["updated_at", "2023-03-31 02:30:49.689890"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 16], ["power_id", 5], ["created_at", "2023-03-31 02:30:49.744043"], ["updated_at", "2023-03-31 02:30:49.744043"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Kimbery Stiedemann"], ["super_name", "Silverclaw Ivy"], ["created_at", "2023-03-31 02:30:49.798853"], ["updated_at", "2023-03-31 02:30:49.798853"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 17], ["power_id", 20], ["created_at", "2023-03-31 02:30:49.852893"], ["updated_at", "2023-03-31 02:30:49.852893"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Mrs. Florrie Parisian"], ["super_name", "Ultra Colin Wagner"], ["created_at", "2023-03-31 02:30:49.908058"], ["updated_at", "2023-03-31 02:30:49.908058"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 18], ["power_id", 27], ["created_at", "2023-03-31 02:30:49.962331"], ["updated_at", "2023-03-31 02:30:49.962331"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 18], ["power_id", 1], ["created_at", "2023-03-31 02:30:50.017251"], ["updated_at", "2023-03-31 02:30:50.017251"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 18], ["power_id", 3], ["created_at", "2023-03-31 02:30:50.071648"], ["updated_at", "2023-03-31 02:30:50.071648"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Gov. Yuki Braun"], ["super_name", "Sinestro"], ["created_at", "2023-03-31 02:30:50.126137"], ["updated_at", "2023-03-31 02:30:50.126137"]]
+  [1m[36mTRANSACTION (101.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.6ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 19], ["power_id", 30], ["created_at", "2023-03-31 02:30:50.230217"], ["updated_at", "2023-03-31 02:30:50.230217"]]
+  [1m[36mTRANSACTION (154.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 19], ["power_id", 28], ["created_at", "2023-03-31 02:30:50.387946"], ["updated_at", "2023-03-31 02:30:50.387946"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 19], ["power_id", 8], ["created_at", "2023-03-31 02:30:50.442592"], ["updated_at", "2023-03-31 02:30:50.442592"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Margo Gleason CPA"], ["super_name", "Cyborg Firestorm"], ["created_at", "2023-03-31 02:30:50.497170"], ["updated_at", "2023-03-31 02:30:50.497170"]]
+  [1m[36mTRANSACTION (77.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 20], ["power_id", 24], ["created_at", "2023-03-31 02:30:50.577285"], ["updated_at", "2023-03-31 02:30:50.577285"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 20], ["power_id", 7], ["created_at", "2023-03-31 02:30:50.631445"], ["updated_at", "2023-03-31 02:30:50.631445"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 20], ["power_id", 25], ["created_at", "2023-03-31 02:30:50.685860"], ["updated_at", "2023-03-31 02:30:50.685860"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Miss Siobhan Schmeler"], ["super_name", "Bumblebee"], ["created_at", "2023-03-31 02:30:50.740192"], ["updated_at", "2023-03-31 02:30:50.740192"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 21], ["power_id", 12], ["created_at", "2023-03-31 02:30:50.794518"], ["updated_at", "2023-03-31 02:30:50.794518"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 21], ["power_id", 26], ["created_at", "2023-03-31 02:30:50.848323"], ["updated_at", "2023-03-31 02:30:50.848323"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 21], ["power_id", 28], ["created_at", "2023-03-31 02:30:50.902528"], ["updated_at", "2023-03-31 02:30:50.902528"]]
+  [1m[36mTRANSACTION (56.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Adrianna Kessler"], ["super_name", "Hercules Brain"], ["created_at", "2023-03-31 02:30:50.962974"], ["updated_at", "2023-03-31 02:30:50.962974"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 22], ["power_id", 24], ["created_at", "2023-03-31 02:30:51.016667"], ["updated_at", "2023-03-31 02:30:51.016667"]]
+  [1m[36mTRANSACTION (77.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 22], ["power_id", 3], ["created_at", "2023-03-31 02:30:51.096322"], ["updated_at", "2023-03-31 02:30:51.096322"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 22], ["power_id", 14], ["created_at", "2023-03-31 02:30:51.150022"], ["updated_at", "2023-03-31 02:30:51.150022"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Elisa Koepp DVM"], ["super_name", "Maxima Brain"], ["created_at", "2023-03-31 02:30:51.204963"], ["updated_at", "2023-03-31 02:30:51.204963"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 23], ["power_id", 30], ["created_at", "2023-03-31 02:30:51.258560"], ["updated_at", "2023-03-31 02:30:51.258560"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Mathew Beier"], ["super_name", "Illustrious Sylar Woman"], ["created_at", "2023-03-31 02:30:51.312576"], ["updated_at", "2023-03-31 02:30:51.312576"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 24], ["power_id", 4], ["created_at", "2023-03-31 02:30:51.366558"], ["updated_at", "2023-03-31 02:30:51.366558"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 24], ["power_id", 11], ["created_at", "2023-03-31 02:30:51.420290"], ["updated_at", "2023-03-31 02:30:51.420290"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Gov. Janey Abshire"], ["super_name", "Green Starfire"], ["created_at", "2023-03-31 02:30:51.474841"], ["updated_at", "2023-03-31 02:30:51.474841"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 25], ["power_id", 3], ["created_at", "2023-03-31 02:30:51.528701"], ["updated_at", "2023-03-31 02:30:51.528701"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 25], ["power_id", 15], ["created_at", "2023-03-31 02:30:51.582599"], ["updated_at", "2023-03-31 02:30:51.582599"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Alane Cassin"], ["super_name", "Agent Rogue Woman"], ["created_at", "2023-03-31 02:30:51.637460"], ["updated_at", "2023-03-31 02:30:51.637460"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 26], ["power_id", 10], ["created_at", "2023-03-31 02:30:51.691661"], ["updated_at", "2023-03-31 02:30:51.691661"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Terry Harber"], ["super_name", "Illustrious Cypher"], ["created_at", "2023-03-31 02:30:51.746503"], ["updated_at", "2023-03-31 02:30:51.746503"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 27], ["power_id", 27], ["created_at", "2023-03-31 02:30:51.800476"], ["updated_at", "2023-03-31 02:30:51.800476"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 27], ["power_id", 22], ["created_at", "2023-03-31 02:30:51.854289"], ["updated_at", "2023-03-31 02:30:51.854289"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 27], ["power_id", 4], ["created_at", "2023-03-31 02:30:51.908711"], ["updated_at", "2023-03-31 02:30:51.908711"]]
+  [1m[36mTRANSACTION (64.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Karl Glover"], ["super_name", "Astro Boy Girl"], ["created_at", "2023-03-31 02:30:51.975694"], ["updated_at", "2023-03-31 02:30:51.975694"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 28], ["power_id", 26], ["created_at", "2023-03-31 02:30:52.030227"], ["updated_at", "2023-03-31 02:30:52.030227"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 28], ["power_id", 24], ["created_at", "2023-03-31 02:30:52.084183"], ["updated_at", "2023-03-31 02:30:52.084183"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Ralph Willms"], ["super_name", "Doctor Beast"], ["created_at", "2023-03-31 02:30:52.139251"], ["updated_at", "2023-03-31 02:30:52.139251"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 29], ["power_id", 9], ["created_at", "2023-03-31 02:30:52.192761"], ["updated_at", "2023-03-31 02:30:52.192761"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 29], ["power_id", 28], ["created_at", "2023-03-31 02:30:52.246503"], ["updated_at", "2023-03-31 02:30:52.246503"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Erik Aufderhar"], ["super_name", "Vibe III"], ["created_at", "2023-03-31 02:30:52.301346"], ["updated_at", "2023-03-31 02:30:52.301346"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 30], ["power_id", 24], ["created_at", "2023-03-31 02:30:52.355417"], ["updated_at", "2023-03-31 02:30:52.355417"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 30], ["power_id", 4], ["created_at", "2023-03-31 02:30:52.410035"], ["updated_at", "2023-03-31 02:30:52.410035"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Sheree Wilderman"], ["super_name", "Supah Shatterstar Man"], ["created_at", "2023-03-31 02:30:52.464160"], ["updated_at", "2023-03-31 02:30:52.464160"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 31], ["power_id", 1], ["created_at", "2023-03-31 02:30:52.517636"], ["updated_at", "2023-03-31 02:30:52.517636"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 31], ["power_id", 22], ["created_at", "2023-03-31 02:30:52.572104"], ["updated_at", "2023-03-31 02:30:52.572104"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jacquie Christiansen"], ["super_name", "Giant Moon Knight Brain"], ["created_at", "2023-03-31 02:30:52.626248"], ["updated_at", "2023-03-31 02:30:52.626248"]]
+  [1m[36mTRANSACTION (55.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 32], ["power_id", 3], ["created_at", "2023-03-31 02:30:52.684961"], ["updated_at", "2023-03-31 02:30:52.684961"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 32], ["power_id", 5], ["created_at", "2023-03-31 02:30:52.739245"], ["updated_at", "2023-03-31 02:30:52.739245"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 32], ["power_id", 15], ["created_at", "2023-03-31 02:30:52.793501"], ["updated_at", "2023-03-31 02:30:52.793501"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Delphia Hills"], ["super_name", "Animal"], ["created_at", "2023-03-31 02:30:52.848692"], ["updated_at", "2023-03-31 02:30:52.848692"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 33], ["power_id", 27], ["created_at", "2023-03-31 02:30:52.902663"], ["updated_at", "2023-03-31 02:30:52.902663"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 33], ["power_id", 8], ["created_at", "2023-03-31 02:30:52.957334"], ["updated_at", "2023-03-31 02:30:52.957334"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Gaston Koch"], ["super_name", "ERG Woman"], ["created_at", "2023-03-31 02:30:53.015996"], ["updated_at", "2023-03-31 02:30:53.015996"]]
+  [1m[36mTRANSACTION (77.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 34], ["power_id", 17], ["created_at", "2023-03-31 02:30:53.095935"], ["updated_at", "2023-03-31 02:30:53.095935"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.4ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Gregorio Kirlin"], ["super_name", "Changeling Man"], ["created_at", "2023-03-31 02:30:53.150619"], ["updated_at", "2023-03-31 02:30:53.150619"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 35], ["power_id", 26], ["created_at", "2023-03-31 02:30:53.205716"], ["updated_at", "2023-03-31 02:30:53.205716"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 35], ["power_id", 12], ["created_at", "2023-03-31 02:30:53.260731"], ["updated_at", "2023-03-31 02:30:53.260731"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 35], ["power_id", 7], ["created_at", "2023-03-31 02:30:53.315049"], ["updated_at", "2023-03-31 02:30:53.315049"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Andree Ward CPA"], ["super_name", "Red Naruto Uzumaki Man"], ["created_at", "2023-03-31 02:30:53.370321"], ["updated_at", "2023-03-31 02:30:53.370321"]]
+  [1m[36mTRANSACTION (57.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 36], ["power_id", 18], ["created_at", "2023-03-31 02:30:53.430853"], ["updated_at", "2023-03-31 02:30:53.430853"]]
+  [1m[36mTRANSACTION (54.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.5ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 36], ["power_id", 23], ["created_at", "2023-03-31 02:30:53.489115"], ["updated_at", "2023-03-31 02:30:53.489115"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Augustus Braun"], ["super_name", "Mr Longshot Eyes"], ["created_at", "2023-03-31 02:30:53.545709"], ["updated_at", "2023-03-31 02:30:53.545709"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 37], ["power_id", 10], ["created_at", "2023-03-31 02:30:53.599762"], ["updated_at", "2023-03-31 02:30:53.599762"]]
+  [1m[36mTRANSACTION (52.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 37], ["power_id", 5], ["created_at", "2023-03-31 02:30:53.654774"], ["updated_at", "2023-03-31 02:30:53.654774"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 37], ["power_id", 11], ["created_at", "2023-03-31 02:30:53.708748"], ["updated_at", "2023-03-31 02:30:53.708748"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Daniel Kilback Jr."], ["super_name", "Misfit"], ["created_at", "2023-03-31 02:30:53.763151"], ["updated_at", "2023-03-31 02:30:53.763151"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 38], ["power_id", 19], ["created_at", "2023-03-31 02:30:53.817687"], ["updated_at", "2023-03-31 02:30:53.817687"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Murray Schiller"], ["super_name", "Agent Walrus"], ["created_at", "2023-03-31 02:30:53.872204"], ["updated_at", "2023-03-31 02:30:53.872204"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 39], ["power_id", 7], ["created_at", "2023-03-31 02:30:53.926720"], ["updated_at", "2023-03-31 02:30:53.926720"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Maria Boyle"], ["super_name", "Mimic IX"], ["created_at", "2023-03-31 02:30:53.981003"], ["updated_at", "2023-03-31 02:30:53.981003"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 40], ["power_id", 7], ["created_at", "2023-03-31 02:30:54.034899"], ["updated_at", "2023-03-31 02:30:54.034899"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 40], ["power_id", 10], ["created_at", "2023-03-31 02:30:54.089361"], ["updated_at", "2023-03-31 02:30:54.089361"]]
+  [1m[36mTRANSACTION (50.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.4ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 40], ["power_id", 26], ["created_at", "2023-03-31 02:30:54.142058"], ["updated_at", "2023-03-31 02:30:54.142058"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Elease Runolfsson JD"], ["super_name", "Aztar the Fated"], ["created_at", "2023-03-31 02:30:54.196808"], ["updated_at", "2023-03-31 02:30:54.196808"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 41], ["power_id", 27], ["created_at", "2023-03-31 02:30:54.250590"], ["updated_at", "2023-03-31 02:30:54.250590"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 41], ["power_id", 26], ["created_at", "2023-03-31 02:30:54.304338"], ["updated_at", "2023-03-31 02:30:54.304338"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 41], ["power_id", 1], ["created_at", "2023-03-31 02:30:54.358841"], ["updated_at", "2023-03-31 02:30:54.358841"]]
+  [1m[36mTRANSACTION (55.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Carolann Ebert Jr."], ["super_name", "Gorilla Grodd"], ["created_at", "2023-03-31 02:30:54.417663"], ["updated_at", "2023-03-31 02:30:54.417663"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 42], ["power_id", 24], ["created_at", "2023-03-31 02:30:54.472222"], ["updated_at", "2023-03-31 02:30:54.472222"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 42], ["power_id", 1], ["created_at", "2023-03-31 02:30:54.525794"], ["updated_at", "2023-03-31 02:30:54.525794"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Timothy Kemmer DO"], ["super_name", "Ares"], ["created_at", "2023-03-31 02:30:54.579797"], ["updated_at", "2023-03-31 02:30:54.579797"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 43], ["power_id", 29], ["created_at", "2023-03-31 02:30:54.634208"], ["updated_at", "2023-03-31 02:30:54.634208"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "The Hon. Alphonse Auer"], ["super_name", "Bumblebee"], ["created_at", "2023-03-31 02:30:54.688173"], ["updated_at", "2023-03-31 02:30:54.688173"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 44], ["power_id", 21], ["created_at", "2023-03-31 02:30:54.742797"], ["updated_at", "2023-03-31 02:30:54.742797"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 44], ["power_id", 6], ["created_at", "2023-03-31 02:30:54.796421"], ["updated_at", "2023-03-31 02:30:54.796421"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 44], ["power_id", 3], ["created_at", "2023-03-31 02:30:54.850430"], ["updated_at", "2023-03-31 02:30:54.850430"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bud Schmitt MD"], ["super_name", "Cyborg Vagabond Boy"], ["created_at", "2023-03-31 02:30:54.905226"], ["updated_at", "2023-03-31 02:30:54.905226"]]
+  [1m[36mTRANSACTION (64.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 45], ["power_id", 5], ["created_at", "2023-03-31 02:30:54.972041"], ["updated_at", "2023-03-31 02:30:54.972041"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 45], ["power_id", 18], ["created_at", "2023-03-31 02:30:55.026603"], ["updated_at", "2023-03-31 02:30:55.026603"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 45], ["power_id", 4], ["created_at", "2023-03-31 02:30:55.080658"], ["updated_at", "2023-03-31 02:30:55.080658"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tish Weissnat"], ["super_name", "Dark Scorpion"], ["created_at", "2023-03-31 02:30:55.134942"], ["updated_at", "2023-03-31 02:30:55.134942"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 46], ["power_id", 29], ["created_at", "2023-03-31 02:30:55.189494"], ["updated_at", "2023-03-31 02:30:55.189494"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 46], ["power_id", 8], ["created_at", "2023-03-31 02:30:55.243890"], ["updated_at", "2023-03-31 02:30:55.243890"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Catherine Hoeger"], ["super_name", "Medusa Strike"], ["created_at", "2023-03-31 02:30:55.299196"], ["updated_at", "2023-03-31 02:30:55.299196"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 47], ["power_id", 20], ["created_at", "2023-03-31 02:30:55.353739"], ["updated_at", "2023-03-31 02:30:55.353739"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 47], ["power_id", 17], ["created_at", "2023-03-31 02:30:55.407817"], ["updated_at", "2023-03-31 02:30:55.407817"]]
+  [1m[36mTRANSACTION (111.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Joan Heller"], ["super_name", "Dark Arclight"], ["created_at", "2023-03-31 02:30:55.521839"], ["updated_at", "2023-03-31 02:30:55.521839"]]
+  [1m[36mTRANSACTION (78.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 48], ["power_id", 23], ["created_at", "2023-03-31 02:30:55.603360"], ["updated_at", "2023-03-31 02:30:55.603360"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 48], ["power_id", 30], ["created_at", "2023-03-31 02:30:55.657314"], ["updated_at", "2023-03-31 02:30:55.657314"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Earnest Schinner"], ["super_name", "Plastique"], ["created_at", "2023-03-31 02:30:55.712336"], ["updated_at", "2023-03-31 02:30:55.712336"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 49], ["power_id", 9], ["created_at", "2023-03-31 02:30:55.766288"], ["updated_at", "2023-03-31 02:30:55.766288"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 49], ["power_id", 13], ["created_at", "2023-03-31 02:30:55.820600"], ["updated_at", "2023-03-31 02:30:55.820600"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Kacie Bradtke"], ["super_name", "Spectre I"], ["created_at", "2023-03-31 02:30:55.874597"], ["updated_at", "2023-03-31 02:30:55.874597"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 50], ["power_id", 20], ["created_at", "2023-03-31 02:30:55.928237"], ["updated_at", "2023-03-31 02:30:55.928237"]]
+  [1m[36mTRANSACTION (51.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 50], ["power_id", 9], ["created_at", "2023-03-31 02:30:55.982549"], ["updated_at", "2023-03-31 02:30:55.982549"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.3ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jesus Maggio Esq."], ["super_name", "Agent Corsair"], ["created_at", "2023-03-31 02:30:56.037589"], ["updated_at", "2023-03-31 02:30:56.037589"]]
+  [1m[36mTRANSACTION (49.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 51], ["power_id", 9], ["created_at", "2023-03-31 02:30:56.090740"], ["updated_at", "2023-03-31 02:30:56.090740"]]
+  [1m[36mTRANSACTION (54.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Dr. Moses Johnston"], ["super_name", "Triton"], ["created_at", "2023-03-31 02:30:56.148817"], ["updated_at", "2023-03-31 02:30:56.148817"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 52], ["power_id", 22], ["created_at", "2023-03-31 02:30:56.203558"], ["updated_at", "2023-03-31 02:30:56.203558"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 52], ["power_id", 11], ["created_at", "2023-03-31 02:30:56.257566"], ["updated_at", "2023-03-31 02:30:56.257566"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Cletus Hodkiewicz"], ["super_name", "Cyborg Aztar"], ["created_at", "2023-03-31 02:30:56.311805"], ["updated_at", "2023-03-31 02:30:56.311805"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 53], ["power_id", 26], ["created_at", "2023-03-31 02:30:56.366244"], ["updated_at", "2023-03-31 02:30:56.366244"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 53], ["power_id", 7], ["created_at", "2023-03-31 02:30:56.420242"], ["updated_at", "2023-03-31 02:30:56.420242"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 53], ["power_id", 6], ["created_at", "2023-03-31 02:30:56.474977"], ["updated_at", "2023-03-31 02:30:56.474977"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jody Barton"], ["super_name", "Havok IX"], ["created_at", "2023-03-31 02:30:56.529299"], ["updated_at", "2023-03-31 02:30:56.529299"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 54], ["power_id", 28], ["created_at", "2023-03-31 02:30:56.583805"], ["updated_at", "2023-03-31 02:30:56.583805"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 54], ["power_id", 8], ["created_at", "2023-03-31 02:30:56.637660"], ["updated_at", "2023-03-31 02:30:56.637660"]]
+  [1m[36mTRANSACTION (63.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 54], ["power_id", 24], ["created_at", "2023-03-31 02:30:56.704361"], ["updated_at", "2023-03-31 02:30:56.704361"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Sen. Claude Beatty"], ["super_name", "Cogliostro Ivy"], ["created_at", "2023-03-31 02:30:56.759489"], ["updated_at", "2023-03-31 02:30:56.759489"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 55], ["power_id", 12], ["created_at", "2023-03-31 02:30:56.813695"], ["updated_at", "2023-03-31 02:30:56.813695"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 55], ["power_id", 19], ["created_at", "2023-03-31 02:30:56.868644"], ["updated_at", "2023-03-31 02:30:56.868644"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 55], ["power_id", 6], ["created_at", "2023-03-31 02:30:56.922704"], ["updated_at", "2023-03-31 02:30:56.922704"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Hilaria Jacobs"], ["super_name", "Plastique"], ["created_at", "2023-03-31 02:30:56.977750"], ["updated_at", "2023-03-31 02:30:56.977750"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 56], ["power_id", 18], ["created_at", "2023-03-31 02:30:57.031829"], ["updated_at", "2023-03-31 02:30:57.031829"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 56], ["power_id", 30], ["created_at", "2023-03-31 02:30:57.086637"], ["updated_at", "2023-03-31 02:30:57.086637"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 56], ["power_id", 17], ["created_at", "2023-03-31 02:30:57.142122"], ["updated_at", "2023-03-31 02:30:57.142122"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Terese Kutch"], ["super_name", "Hollow Wolf"], ["created_at", "2023-03-31 02:30:57.197093"], ["updated_at", "2023-03-31 02:30:57.197093"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 57], ["power_id", 4], ["created_at", "2023-03-31 02:30:57.251522"], ["updated_at", "2023-03-31 02:30:57.251522"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 57], ["power_id", 5], ["created_at", "2023-03-31 02:30:57.305675"], ["updated_at", "2023-03-31 02:30:57.305675"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jenise Purdy"], ["super_name", "Tinkerer III"], ["created_at", "2023-03-31 02:30:57.360776"], ["updated_at", "2023-03-31 02:30:57.360776"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 58], ["power_id", 14], ["created_at", "2023-03-31 02:30:57.414705"], ["updated_at", "2023-03-31 02:30:57.414705"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.4ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 58], ["power_id", 20], ["created_at", "2023-03-31 02:30:57.469308"], ["updated_at", "2023-03-31 02:30:57.469308"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.4ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 58], ["power_id", 26], ["created_at", "2023-03-31 02:30:57.525495"], ["updated_at", "2023-03-31 02:30:57.525495"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Alva Champlin"], ["super_name", "Meltdown"], ["created_at", "2023-03-31 02:30:57.581149"], ["updated_at", "2023-03-31 02:30:57.581149"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.6ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 59], ["power_id", 2], ["created_at", "2023-03-31 02:30:57.635815"], ["updated_at", "2023-03-31 02:30:57.635815"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 59], ["power_id", 8], ["created_at", "2023-03-31 02:30:57.692307"], ["updated_at", "2023-03-31 02:30:57.692307"]]
+  [1m[36mTRANSACTION (49.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.3ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "In Shanahan"], ["super_name", "Mystique"], ["created_at", "2023-03-31 02:30:57.746934"], ["updated_at", "2023-03-31 02:30:57.746934"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 60], ["power_id", 8], ["created_at", "2023-03-31 02:30:57.802112"], ["updated_at", "2023-03-31 02:30:57.802112"]]
+  [1m[36mTRANSACTION (50.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 60], ["power_id", 7], ["created_at", "2023-03-31 02:30:57.855759"], ["updated_at", "2023-03-31 02:30:57.855759"]]
+  [1m[36mTRANSACTION (55.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.3ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Msgr. Darrell Hirthe"], ["super_name", "Mr Amazo II"], ["created_at", "2023-03-31 02:30:57.914539"], ["updated_at", "2023-03-31 02:30:57.914539"]]
+  [1m[36mTRANSACTION (50.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.5ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 61], ["power_id", 21], ["created_at", "2023-03-31 02:30:57.969075"], ["updated_at", "2023-03-31 02:30:57.969075"]]
+  [1m[36mTRANSACTION (49.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 61], ["power_id", 22], ["created_at", "2023-03-31 02:30:58.023557"], ["updated_at", "2023-03-31 02:30:58.023557"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 61], ["power_id", 10], ["created_at", "2023-03-31 02:30:58.077630"], ["updated_at", "2023-03-31 02:30:58.077630"]]
+  [1m[36mTRANSACTION (52.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "William Wilkinson MD"], ["super_name", "Ymir"], ["created_at", "2023-03-31 02:30:58.133067"], ["updated_at", "2023-03-31 02:30:58.133067"]]
+  [1m[36mTRANSACTION (73.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 62], ["power_id", 14], ["created_at", "2023-03-31 02:30:58.208874"], ["updated_at", "2023-03-31 02:30:58.208874"]]
+  [1m[36mTRANSACTION (58.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 62], ["power_id", 23], ["created_at", "2023-03-31 02:30:58.270573"], ["updated_at", "2023-03-31 02:30:58.270573"]]
+  [1m[36mTRANSACTION (58.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tracy Hessel"], ["super_name", "Captain Quill Boy"], ["created_at", "2023-03-31 02:30:58.332171"], ["updated_at", "2023-03-31 02:30:58.332171"]]
+  [1m[36mTRANSACTION (58.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 63], ["power_id", 19], ["created_at", "2023-03-31 02:30:58.393263"], ["updated_at", "2023-03-31 02:30:58.393263"]]
+  [1m[36mTRANSACTION (57.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Shirly Conn"], ["super_name", "Ares Wolf"], ["created_at", "2023-03-31 02:30:58.453956"], ["updated_at", "2023-03-31 02:30:58.453956"]]
+  [1m[36mTRANSACTION (61.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 64], ["power_id", 13], ["created_at", "2023-03-31 02:30:58.518404"], ["updated_at", "2023-03-31 02:30:58.518404"]]
+  [1m[36mTRANSACTION (59.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 64], ["power_id", 12], ["created_at", "2023-03-31 02:30:58.580160"], ["updated_at", "2023-03-31 02:30:58.580160"]]
+  [1m[36mTRANSACTION (57.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Msgr. Joellen Carter"], ["super_name", "Dark Fixer"], ["created_at", "2023-03-31 02:30:58.640967"], ["updated_at", "2023-03-31 02:30:58.640967"]]
+  [1m[36mTRANSACTION (57.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 65], ["power_id", 7], ["created_at", "2023-03-31 02:30:58.702029"], ["updated_at", "2023-03-31 02:30:58.702029"]]
+  [1m[36mTRANSACTION (56.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 65], ["power_id", 18], ["created_at", "2023-03-31 02:30:58.761656"], ["updated_at", "2023-03-31 02:30:58.761656"]]
+  [1m[36mTRANSACTION (60.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 65], ["power_id", 27], ["created_at", "2023-03-31 02:30:58.825399"], ["updated_at", "2023-03-31 02:30:58.825399"]]
+  [1m[36mTRANSACTION (58.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Sheba Cormier"], ["super_name", "Meltdown Woman"], ["created_at", "2023-03-31 02:30:58.886527"], ["updated_at", "2023-03-31 02:30:58.886527"]]
+  [1m[36mTRANSACTION (59.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 66], ["power_id", 6], ["created_at", "2023-03-31 02:30:58.948347"], ["updated_at", "2023-03-31 02:30:58.948347"]]
+  [1m[36mTRANSACTION (66.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Arlen Satterfield"], ["super_name", "Electro"], ["created_at", "2023-03-31 02:30:59.018091"], ["updated_at", "2023-03-31 02:30:59.018091"]]
+  [1m[36mTRANSACTION (85.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 67], ["power_id", 26], ["created_at", "2023-03-31 02:30:59.106522"], ["updated_at", "2023-03-31 02:30:59.106522"]]
+  [1m[36mTRANSACTION (58.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 67], ["power_id", 7], ["created_at", "2023-03-31 02:30:59.167713"], ["updated_at", "2023-03-31 02:30:59.167713"]]
+  [1m[36mTRANSACTION (59.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Theda Barrows"], ["super_name", "Ripcord Girl"], ["created_at", "2023-03-31 02:30:59.230398"], ["updated_at", "2023-03-31 02:30:59.230398"]]
+  [1m[36mTRANSACTION (56.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 68], ["power_id", 20], ["created_at", "2023-03-31 02:30:59.289351"], ["updated_at", "2023-03-31 02:30:59.289351"]]
+  [1m[36mTRANSACTION (56.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Francisca Fay"], ["super_name", "Joker Claw"], ["created_at", "2023-03-31 02:30:59.348921"], ["updated_at", "2023-03-31 02:30:59.348921"]]
+  [1m[36mTRANSACTION (58.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 69], ["power_id", 16], ["created_at", "2023-03-31 02:30:59.410426"], ["updated_at", "2023-03-31 02:30:59.410426"]]
+  [1m[36mTRANSACTION (57.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Victor Bartoletti"], ["super_name", "The Granny Goodness"], ["created_at", "2023-03-31 02:30:59.470517"], ["updated_at", "2023-03-31 02:30:59.470517"]]
+  [1m[36mTRANSACTION (84.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 70], ["power_id", 26], ["created_at", "2023-03-31 02:30:59.557822"], ["updated_at", "2023-03-31 02:30:59.557822"]]
+  [1m[36mTRANSACTION (56.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 70], ["power_id", 1], ["created_at", "2023-03-31 02:30:59.616924"], ["updated_at", "2023-03-31 02:30:59.616924"]]
+  [1m[36mTRANSACTION (56.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Douglas Haag"], ["super_name", "Supah Frenzy"], ["created_at", "2023-03-31 02:30:59.676656"], ["updated_at", "2023-03-31 02:30:59.676656"]]
+  [1m[36mTRANSACTION (58.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 71], ["power_id", 20], ["created_at", "2023-03-31 02:30:59.737356"], ["updated_at", "2023-03-31 02:30:59.737356"]]
+  [1m[36mTRANSACTION (60.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 71], ["power_id", 10], ["created_at", "2023-03-31 02:30:59.800041"], ["updated_at", "2023-03-31 02:30:59.800041"]]
+  [1m[36mTRANSACTION (55.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Luke O'Conner"], ["super_name", "Green Toxin"], ["created_at", "2023-03-31 02:30:59.857954"], ["updated_at", "2023-03-31 02:30:59.857954"]]
+  [1m[36mTRANSACTION (60.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 72], ["power_id", 10], ["created_at", "2023-03-31 02:30:59.920714"], ["updated_at", "2023-03-31 02:30:59.920714"]]
+  [1m[36mTRANSACTION (56.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 72], ["power_id", 22], ["created_at", "2023-03-31 02:30:59.980058"], ["updated_at", "2023-03-31 02:30:59.980058"]]
+  [1m[36mTRANSACTION (57.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 72], ["power_id", 11], ["created_at", "2023-03-31 02:31:00.039617"], ["updated_at", "2023-03-31 02:31:00.039617"]]
+  [1m[36mTRANSACTION (58.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Kelsi Leannon"], ["super_name", "Cyborg Heat Wave Girl"], ["created_at", "2023-03-31 02:31:00.101755"], ["updated_at", "2023-03-31 02:31:00.101755"]]
+  [1m[36mTRANSACTION (59.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 73], ["power_id", 3], ["created_at", "2023-03-31 02:31:00.164181"], ["updated_at", "2023-03-31 02:31:00.164181"]]
+  [1m[36mTRANSACTION (57.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 73], ["power_id", 27], ["created_at", "2023-03-31 02:31:00.224494"], ["updated_at", "2023-03-31 02:31:00.224494"]]
+  [1m[36mTRANSACTION (57.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 73], ["power_id", 30], ["created_at", "2023-03-31 02:31:00.284851"], ["updated_at", "2023-03-31 02:31:00.284851"]]
+  [1m[36mTRANSACTION (54.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Benedict Crist"], ["super_name", "Ben Wolf"], ["created_at", "2023-03-31 02:31:00.342307"], ["updated_at", "2023-03-31 02:31:00.342307"]]
+  [1m[36mTRANSACTION (56.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 74], ["power_id", 28], ["created_at", "2023-03-31 02:31:00.401897"], ["updated_at", "2023-03-31 02:31:00.401897"]]
+  [1m[36mTRANSACTION (57.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 74], ["power_id", 16], ["created_at", "2023-03-31 02:31:00.462732"], ["updated_at", "2023-03-31 02:31:00.462732"]]
+  [1m[36mTRANSACTION (56.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 74], ["power_id", 24], ["created_at", "2023-03-31 02:31:00.522223"], ["updated_at", "2023-03-31 02:31:00.522223"]]
+  [1m[36mTRANSACTION (54.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Laura Russel"], ["super_name", "Junkpile"], ["created_at", "2023-03-31 02:31:00.579801"], ["updated_at", "2023-03-31 02:31:00.579801"]]
+  [1m[36mTRANSACTION (56.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 75], ["power_id", 26], ["created_at", "2023-03-31 02:31:00.639202"], ["updated_at", "2023-03-31 02:31:00.639202"]]
+  [1m[36mTRANSACTION (63.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 75], ["power_id", 29], ["created_at", "2023-03-31 02:31:00.705797"], ["updated_at", "2023-03-31 02:31:00.705797"]]
+  [1m[36mTRANSACTION (63.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 75], ["power_id", 7], ["created_at", "2023-03-31 02:31:00.771502"], ["updated_at", "2023-03-31 02:31:00.771502"]]
+  [1m[36mTRANSACTION (77.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Moises Kuvalis"], ["super_name", "Supah Thanos Wolf"], ["created_at", "2023-03-31 02:31:00.851773"], ["updated_at", "2023-03-31 02:31:00.851773"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 76], ["power_id", 3], ["created_at", "2023-03-31 02:31:00.905944"], ["updated_at", "2023-03-31 02:31:00.905944"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Olin McDermott"], ["super_name", "Dark Garbage"], ["created_at", "2023-03-31 02:31:00.960906"], ["updated_at", "2023-03-31 02:31:00.960906"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 77], ["power_id", 30], ["created_at", "2023-03-31 02:31:01.014972"], ["updated_at", "2023-03-31 02:31:01.014972"]]
+  [1m[36mTRANSACTION (77.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Gay Lynch I"], ["super_name", "The Loki Brain"], ["created_at", "2023-03-31 02:31:01.095301"], ["updated_at", "2023-03-31 02:31:01.095301"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 78], ["power_id", 16], ["created_at", "2023-03-31 02:31:01.148914"], ["updated_at", "2023-03-31 02:31:01.148914"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 78], ["power_id", 1], ["created_at", "2023-03-31 02:31:01.203606"], ["updated_at", "2023-03-31 02:31:01.203606"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 78], ["power_id", 4], ["created_at", "2023-03-31 02:31:01.257597"], ["updated_at", "2023-03-31 02:31:01.257597"]]
+  [1m[36mTRANSACTION (52.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Ali Kshlerin"], ["super_name", "Firelord Fist"], ["created_at", "2023-03-31 02:31:01.312488"], ["updated_at", "2023-03-31 02:31:01.312488"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 79], ["power_id", 4], ["created_at", "2023-03-31 02:31:01.366427"], ["updated_at", "2023-03-31 02:31:01.366427"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Jarvis Toy"], ["super_name", "Toxin"], ["created_at", "2023-03-31 02:31:01.420864"], ["updated_at", "2023-03-31 02:31:01.420864"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 80], ["power_id", 5], ["created_at", "2023-03-31 02:31:01.475454"], ["updated_at", "2023-03-31 02:31:01.475454"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Romeo Sauer"], ["super_name", "Rick Flag"], ["created_at", "2023-03-31 02:31:01.529858"], ["updated_at", "2023-03-31 02:31:01.529858"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 81], ["power_id", 12], ["created_at", "2023-03-31 02:31:01.584475"], ["updated_at", "2023-03-31 02:31:01.584475"]]
+  [1m[36mTRANSACTION (55.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 81], ["power_id", 11], ["created_at", "2023-03-31 02:31:01.643131"], ["updated_at", "2023-03-31 02:31:01.643131"]]
+  [1m[36mTRANSACTION (64.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Minna Beier"], ["super_name", "Bizarro the Fated"], ["created_at", "2023-03-31 02:31:01.711089"], ["updated_at", "2023-03-31 02:31:01.711089"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 82], ["power_id", 8], ["created_at", "2023-03-31 02:31:01.764957"], ["updated_at", "2023-03-31 02:31:01.764957"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 82], ["power_id", 27], ["created_at", "2023-03-31 02:31:01.819409"], ["updated_at", "2023-03-31 02:31:01.819409"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 82], ["power_id", 21], ["created_at", "2023-03-31 02:31:01.873257"], ["updated_at", "2023-03-31 02:31:01.873257"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Lucien Flatley III"], ["super_name", "General Aqua Woman"], ["created_at", "2023-03-31 02:31:01.927535"], ["updated_at", "2023-03-31 02:31:01.927535"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 83], ["power_id", 27], ["created_at", "2023-03-31 02:31:01.982015"], ["updated_at", "2023-03-31 02:31:01.982015"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Belinda Wilderman"], ["super_name", "The Hope Summers Thirteen"], ["created_at", "2023-03-31 02:31:02.036354"], ["updated_at", "2023-03-31 02:31:02.036354"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 84], ["power_id", 19], ["created_at", "2023-03-31 02:31:02.090783"], ["updated_at", "2023-03-31 02:31:02.090783"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Grant Altenwerth JD"], ["super_name", "Dark Mera Woman"], ["created_at", "2023-03-31 02:31:02.145048"], ["updated_at", "2023-03-31 02:31:02.145048"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 85], ["power_id", 4], ["created_at", "2023-03-31 02:31:02.198909"], ["updated_at", "2023-03-31 02:31:02.198909"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Ramiro Bailey Esq."], ["super_name", "Agent Impulse Strange"], ["created_at", "2023-03-31 02:31:02.253726"], ["updated_at", "2023-03-31 02:31:02.253726"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 86], ["power_id", 30], ["created_at", "2023-03-31 02:31:02.307779"], ["updated_at", "2023-03-31 02:31:02.307779"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 86], ["power_id", 29], ["created_at", "2023-03-31 02:31:02.362283"], ["updated_at", "2023-03-31 02:31:02.362283"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Lewis Franecki"], ["super_name", "Firebird"], ["created_at", "2023-03-31 02:31:02.416603"], ["updated_at", "2023-03-31 02:31:02.416603"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 87], ["power_id", 23], ["created_at", "2023-03-31 02:31:02.471421"], ["updated_at", "2023-03-31 02:31:02.471421"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 87], ["power_id", 12], ["created_at", "2023-03-31 02:31:02.525511"], ["updated_at", "2023-03-31 02:31:02.525511"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 87], ["power_id", 20], ["created_at", "2023-03-31 02:31:02.579627"], ["updated_at", "2023-03-31 02:31:02.579627"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Faustino Cartwright"], ["super_name", "Doctor Phantom"], ["created_at", "2023-03-31 02:31:02.634411"], ["updated_at", "2023-03-31 02:31:02.634411"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 88], ["power_id", 20], ["created_at", "2023-03-31 02:31:02.688293"], ["updated_at", "2023-03-31 02:31:02.688293"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 88], ["power_id", 21], ["created_at", "2023-03-31 02:31:02.743059"], ["updated_at", "2023-03-31 02:31:02.743059"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 88], ["power_id", 27], ["created_at", "2023-03-31 02:31:02.797067"], ["updated_at", "2023-03-31 02:31:02.797067"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Allen Rempel III"], ["super_name", "Giant War Machine Thirteen"], ["created_at", "2023-03-31 02:31:02.853880"], ["updated_at", "2023-03-31 02:31:02.853880"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 89], ["power_id", 15], ["created_at", "2023-03-31 02:31:02.907807"], ["updated_at", "2023-03-31 02:31:02.907807"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Caryl Bernhard"], ["super_name", "Dark Colossus Spirit"], ["created_at", "2023-03-31 02:31:02.962073"], ["updated_at", "2023-03-31 02:31:02.962073"]]
+  [1m[36mTRANSACTION (64.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 90], ["power_id", 23], ["created_at", "2023-03-31 02:31:03.029316"], ["updated_at", "2023-03-31 02:31:03.029316"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 90], ["power_id", 3], ["created_at", "2023-03-31 02:31:03.083287"], ["updated_at", "2023-03-31 02:31:03.083287"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 90], ["power_id", 29], ["created_at", "2023-03-31 02:31:03.137863"], ["updated_at", "2023-03-31 02:31:03.137863"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Erik Kuhn"], ["super_name", "Giant Century"], ["created_at", "2023-03-31 02:31:03.192172"], ["updated_at", "2023-03-31 02:31:03.192172"]]
+  [1m[36mTRANSACTION (51.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 91], ["power_id", 17], ["created_at", "2023-03-31 02:31:03.246529"], ["updated_at", "2023-03-31 02:31:03.246529"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Rudy Gottlieb MD"], ["super_name", "Sentry"], ["created_at", "2023-03-31 02:31:03.300490"], ["updated_at", "2023-03-31 02:31:03.300490"]]
+  [1m[36mTRANSACTION (55.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 92], ["power_id", 6], ["created_at", "2023-03-31 02:31:03.358178"], ["updated_at", "2023-03-31 02:31:03.358178"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Shenika Schaden"], ["super_name", "Husk Claw"], ["created_at", "2023-03-31 02:31:03.413388"], ["updated_at", "2023-03-31 02:31:03.413388"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 93], ["power_id", 28], ["created_at", "2023-03-31 02:31:03.467313"], ["updated_at", "2023-03-31 02:31:03.467313"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 93], ["power_id", 16], ["created_at", "2023-03-31 02:31:03.521832"], ["updated_at", "2023-03-31 02:31:03.521832"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 93], ["power_id", 8], ["created_at", "2023-03-31 02:31:03.575885"], ["updated_at", "2023-03-31 02:31:03.575885"]]
+  [1m[36mTRANSACTION (56.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.4ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bret Hettinger II"], ["super_name", "Rorschach"], ["created_at", "2023-03-31 02:31:03.635627"], ["updated_at", "2023-03-31 02:31:03.635627"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.6ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 94], ["power_id", 7], ["created_at", "2023-03-31 02:31:03.692168"], ["updated_at", "2023-03-31 02:31:03.692168"]]
+  [1m[36mTRANSACTION (50.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.6ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Barry Rau"], ["super_name", "Agent Mockingbird I"], ["created_at", "2023-03-31 02:31:03.748776"], ["updated_at", "2023-03-31 02:31:03.748776"]]
+  [1m[36mTRANSACTION (50.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.3ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 95], ["power_id", 28], ["created_at", "2023-03-31 02:31:03.804112"], ["updated_at", "2023-03-31 02:31:03.804112"]]
+  [1m[36mTRANSACTION (50.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.5ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 95], ["power_id", 6], ["created_at", "2023-03-31 02:31:03.857958"], ["updated_at", "2023-03-31 02:31:03.857958"]]
+  [1m[36mTRANSACTION (50.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.6ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 95], ["power_id", 24], ["created_at", "2023-03-31 02:31:03.913906"], ["updated_at", "2023-03-31 02:31:03.913906"]]
+  [1m[36mTRANSACTION (50.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.3ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tomoko Hoppe Esq."], ["super_name", "Spawn Skull"], ["created_at", "2023-03-31 02:31:03.970893"], ["updated_at", "2023-03-31 02:31:03.970893"]]
+  [1m[36mTRANSACTION (50.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 96], ["power_id", 5], ["created_at", "2023-03-31 02:31:04.024996"], ["updated_at", "2023-03-31 02:31:04.024996"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 96], ["power_id", 20], ["created_at", "2023-03-31 02:31:04.079299"], ["updated_at", "2023-03-31 02:31:04.079299"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Delora Johns DO"], ["super_name", "Green Triton X"], ["created_at", "2023-03-31 02:31:04.133509"], ["updated_at", "2023-03-31 02:31:04.133509"]]
+  [1m[36mTRANSACTION (51.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 97], ["power_id", 4], ["created_at", "2023-03-31 02:31:04.187381"], ["updated_at", "2023-03-31 02:31:04.187381"]]
+  [1m[36mTRANSACTION (51.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Dion Keebler"], ["super_name", "Bullseye"], ["created_at", "2023-03-31 02:31:04.241967"], ["updated_at", "2023-03-31 02:31:04.241967"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 98], ["power_id", 10], ["created_at", "2023-03-31 02:31:04.296003"], ["updated_at", "2023-03-31 02:31:04.296003"]]
+  [1m[36mTRANSACTION (52.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Average"], ["hero_id", 98], ["power_id", 14], ["created_at", "2023-03-31 02:31:04.350808"], ["updated_at", "2023-03-31 02:31:04.350808"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tiera Mueller"], ["super_name", "Fixer Wolf"], ["created_at", "2023-03-31 02:31:04.405095"], ["updated_at", "2023-03-31 02:31:04.405095"]]
+  [1m[36mTRANSACTION (51.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 99], ["power_id", 23], ["created_at", "2023-03-31 02:31:04.459061"], ["updated_at", "2023-03-31 02:31:04.459061"]]
+  [1m[36mTRANSACTION (51.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHero Create (0.2ms)[0m  [1m[32mINSERT INTO "heros" ("name", "super_name", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Prof. Dolores Stroman"], ["super_name", "Dark Crystal"], ["created_at", "2023-03-31 02:31:04.513902"], ["updated_at", "2023-03-31 02:31:04.513902"]]
+  [1m[36mTRANSACTION (51.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 100], ["power_id", 7], ["created_at", "2023-03-31 02:31:04.567949"], ["updated_at", "2023-03-31 02:31:04.567949"]]
+  [1m[36mTRANSACTION (51.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Weak"], ["hero_id", 100], ["power_id", 17], ["created_at", "2023-03-31 02:31:04.622567"], ["updated_at", "2023-03-31 02:31:04.622567"]]
+  [1m[36mTRANSACTION (51.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHeroPower Create (0.2ms)[0m  [1m[32mINSERT INTO "hero_powers" ("strength", "hero_id", "power_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["strength", "Strong"], ["hero_id", 100], ["power_id", 19], ["created_at", "2023-03-31 02:31:04.676453"], ["updated_at", "2023-03-31 02:31:04.676453"]]
+  [1m[36mTRANSACTION (51.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mHero Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "heros"[0m
