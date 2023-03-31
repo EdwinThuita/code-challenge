@@ -9,7 +9,7 @@
 -The API allows users to perform **CRUD** operations such as **adding** new `heroes` and `powers`, updating and **deleting** existing heroes and powers. Users can also associate specific powers with a hero by creating a new HeroPower entry.
 
 # Get-started
-1. A)First **fork** this repository to your github account.
+1. First **fork** this repository to your github account.
 
      [Click-Here-To-Fork](https://github.com/EdwinThuita/codechallenge/fork)
 2. **Git clone** to your local machine
