@@ -177,7 +177,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.13)
   bootsnap
   debug
-  faker
+  faker (~> 3.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   railties (= 7.0.4.3)

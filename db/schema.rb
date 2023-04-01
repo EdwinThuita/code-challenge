@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_052127) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_31_042451) do
   create_table "hero_powers", force: :cascade do |t|
     t.string "strength"
     t.integer "hero_id", null: false
@@ -35,6 +35,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_29_052127) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "hero_powers", "heros"
-  add_foreign_key "hero_powers", "powers"
 end

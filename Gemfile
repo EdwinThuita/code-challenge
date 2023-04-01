@@ -14,7 +14,7 @@ gem 'active_model_serializers', '~> 0.10.13'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
-gem 'faker'
+gem "faker", "~> 3.1"
 
 gem 'railties', '7.0.4.3'
 
